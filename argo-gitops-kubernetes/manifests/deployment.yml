@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-gitops-app
+  namespace: default
+  labels:
+    app: web-gitops-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: web-gitops-app
+  template:
+    metadata:
+      labels:
+        app: web-gitops-app
+    spec:
+      containers:
+      - name: web-container
+        image: nginx:1.25-alpine
+        ports:
+        - containerPort: 80
+        resources:
+          requests:
+            cpu: "100m"
+            memory: "128Mi"
+          limits:
+            cpu: "250m"
+            memory: "256Mi"
